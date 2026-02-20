@@ -15,6 +15,9 @@ export default function HomePage() {
         <Link to="/categories" style={{ padding: "8px 12px", border: "1px solid #ccc", borderRadius: 6 }}>
           Ir para Categories
         </Link>
+        <Link to="/products" style={{ padding: "8px 12px", border: "1px solid #ccc", borderRadius: 6 }}>
+          Ir para Produtos
+        </Link>
 
       </div>
     </div>

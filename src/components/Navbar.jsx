@@ -36,6 +36,12 @@ export default function Navbar() {
       >
         Categories
       </Link>
+      <Link
+        to="/products"
+        style={{ fontWeight: location.pathname === "/orders" ? "bold" : "normal" }}
+      >
+        Products
+      </Link>
     </nav>
   );
 }
