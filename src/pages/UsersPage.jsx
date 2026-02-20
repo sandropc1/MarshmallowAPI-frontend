@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Users from "../components/Users.jsx";
+import UsersActions from "../components/users/UsersActions.jsx";
+import CreateUserForm from "../components/users/CreateUserForm.jsx";
 import baseURL from "../routes/api.js";
 
 export default function UsersPage() {
@@ -10,12 +12,7 @@ export default function UsersPage() {
   const [loadingList, setLoadingList] = useState(false);
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState("");
-
   const [showForm, setShowForm] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
 
   async function loadUsers() {
     try {
@@ -35,14 +32,10 @@ export default function UsersPage() {
     }
   }
 
-  async function createUser(e) {
-    e.preventDefault();
-
+  async function createUser(payload) {
     try {
       setError("");
       setCreating(true);
-
-      const payload = { name, email, phone, password };
 
       const res = await fetch(`${baseURL}/users`, {
         method: "POST",
@@ -60,13 +53,9 @@ export default function UsersPage() {
       if (created) setUsers((prev) => [created, ...prev]);
       else await loadUsers();
 
-      setName("");
-      setEmail("");
-      setPhone("");
-      setPassword("");
       setShowForm(false);
-    } catch (e2) {
-      setError(e2?.message || "Erro ao criar usuário");
+    } catch (e) {
+      setError(e?.message || "Erro ao criar usuário");
     } finally {
       setCreating(false);
     }
@@ -76,73 +65,29 @@ export default function UsersPage() {
     <div>
       <h2>Usuários</h2>
 
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
-        <button
-          onClick={loadUsers}
-          disabled={loadingList || creating}
-          style={{ padding: "8px 12px" }}
-        >
-          {loadingList ? "Carregando..." : "Carregar usuários"}
-        </button>
-
-        <button
-          onClick={() => setShowForm((v) => !v)}
-          disabled={creating}
-          style={{ padding: "8px 12px" }}
-        >
-          {showForm ? "Fechar cadastro" : "Adicionar usuário"}
-        </button>
-      </div>
+      <UsersActions
+        usersCount={users.length}
+        onLoad={loadUsers}
+        onToggleForm={() => setShowForm((v) => !v)}
+        loading={loadingList}
+        creating={creating}
+        showForm={showForm}
+      />
 
       {error && <p style={{ color: "crimson" }}>Erro: {error}</p>}
 
       {showForm && (
-        <div style={{ marginTop: 12, padding: 12, border: "1px solid #ddd", borderRadius: 8, maxWidth: 520 }}>
-          <h3 style={{ marginTop: 0 }}>Criar usuário</h3>
-
-          <form onSubmit={createUser} style={{ display: "grid", gap: 10 }}>
-            <label style={{ display: "grid", gap: 6 }}>
-              Nome
-              <input value={name} onChange={(e) => setName(e.target.value)} required />
-            </label>
-
-            <label style={{ display: "grid", gap: 6 }}>
-              Email
-              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" required />
-            </label>
-
-            <label style={{ display: "grid", gap: 6 }}>
-              Telefone
-              <input value={phone} onChange={(e) => setPhone(e.target.value)} inputMode="tel" />
-            </label>
-
-            <label style={{ display: "grid", gap: 6 }}>
-              Senha
-              <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                minLength={6}
-                required
-              />
-            </label>
-
-            <button type="submit" disabled={creating} style={{ padding: "8px 12px" }}>
-              {creating ? "Salvando..." : "Salvar"}
-            </button>
-
-            <pre style={{ background: "#111", color: "#0f0", padding: 12, borderRadius: 8, overflow: "auto" }}>
-              {JSON.stringify({ name, email, phone, password }, null, 2)}
-            </pre>
-          </form>
-        </div>
+        <CreateUserForm
+          onSubmit={createUser}
+          loading={creating}
+        />
       )}
 
       <div style={{ marginTop: 12 }}>
         <Users users={users} />
       </div>
 
-      <button onClick={() => navigate("/")} style={{ padding: "6px 10px", marginBottom: 12 }}>
+      <button onClick={() => navigate("/")} style={{ padding: "6px 10px", marginTop: 12 }}>
         Voltar para Home
       </button>
     </div>

@@ -12,6 +12,10 @@ export default function HomePage() {
         <Link to="/orders" style={{ padding: "8px 12px", border: "1px solid #ccc", borderRadius: 6 }}>
           Ir para Orders
         </Link>
+        <Link to="/categories" style={{ padding: "8px 12px", border: "1px solid #ccc", borderRadius: 6 }}>
+          Ir para Categories
+        </Link>
+
       </div>
     </div>
   );
