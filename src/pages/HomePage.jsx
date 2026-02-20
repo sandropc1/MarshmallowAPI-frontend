@@ -3,23 +3,11 @@ import { Link } from "react-router-dom";
 export default function HomePage() {
   return (
     <div>
-      <p>Página inicial. Escolha um módulo:</p>
+      <p class = "p-3">Esta aplicação foi desenvolvida como parte da minha jornada de aprendizado em desenvolvimento web.Aqui pratico integração com APIs, organização de componentes e uso de ferramentas modernas do ecossistema
+          JavaScript. </p>
 
-      <div style={{ display: "flex", gap: 8 }}>
-        <Link to="/users" style={{ padding: "8px 12px", border: "1px solid #ccc", borderRadius: 6 }}>
-          Ir para Users
-        </Link>
-        <Link to="/orders" style={{ padding: "8px 12px", border: "1px solid #ccc", borderRadius: 6 }}>
-          Ir para Orders
-        </Link>
-        <Link to="/categories" style={{ padding: "8px 12px", border: "1px solid #ccc", borderRadius: 6 }}>
-          Ir para Categories
-        </Link>
-        <Link to="/products" style={{ padding: "8px 12px", border: "1px solid #ccc", borderRadius: 6 }}>
-          Ir para Produtos
-        </Link>
+      <p class = "p-3">Mais do que um sistema funcional, este projeto representa experimentação, evolução e aprimoramento constante das minhas habilidades técnicas.</p>
 
-      </div>
     </div>
   );
 }

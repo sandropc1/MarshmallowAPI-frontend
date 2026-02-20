@@ -4,12 +4,7 @@ export default function Navbar() {
   const location = useLocation();
 
   return (
-    <nav style={{
-      display: "flex",
-      gap: 16,
-      padding: "12px 16px",
-      borderBottom: "1px solid #ddd"
-    }}>
+    <nav class = "text-white bg-slate-800 flex gap-16 p-8 border-b">
       <Link
         to="/"
         style={{ fontWeight: location.pathname === "/" ? "bold" : "normal" }}
