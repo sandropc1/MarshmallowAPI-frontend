@@ -83,11 +83,11 @@ export default function UsersPage() {
         />
       )}
 
-      <div style={{ marginTop: 12 }}>
+      <div class="m-12">
         <Users users={users} />
       </div>
 
-      <button onClick={() => navigate("/")} style={{ padding: "6px 10px", marginTop: 12 }}>
+      <button id="btn-home" onClick={() => navigate("/")}>
         Voltar para Home
       </button>
     </div>

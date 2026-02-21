@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../buttons/Button";
 
 export default function CreateUserForm({ onSubmit, loading }) {
   const [name, setName] = useState("");
@@ -17,23 +18,22 @@ export default function CreateUserForm({ onSubmit, loading }) {
   }
 
   return (
-    <div style={{ marginTop: 12, padding: 12, border: "1px solid #ddd", borderRadius: 8, maxWidth: 520 }}>
-      <h3>Criar usuário</h3>
+    <div class = "m-8 border max-w-xs">
+        <div class="bg-slate-800 border-b p-2">
+            <h3 class="text-white">Criar usuário</h3>
+        </div>
+        <div class="bg-gray-200 p-3">
+          <form onSubmit={handleSubmit} class="grid p-2 gap-1">
+            <input class="border p-1" value={name} onChange={(e) => setName(e.target.value)} placeholder="John Apis" required />
+            <input class="border p-1" value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="johnapis@gmail.com" required />
+            <input class="border p-1" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(11) 9 9999-9999" />
+            <input class="border p-1" value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Senha" required />
 
-      <form onSubmit={handleSubmit} style={{ display: "grid", gap: 10 }}>
-        <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nome" required />
-        <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" required />
-        <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Telefone" />
-        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Senha" required />
-
-        <button type="submit" disabled={loading}>
-          {loading ? "Salvando..." : "Salvar"}
-        </button>
-
-        <pre style={{ background: "#111", color: "#0f0", padding: 12 }}>
-          {JSON.stringify({ name, email, phone, password }, null, 2)}
-        </pre>
-      </form>
+            <Button type="submit" disabled={loading}>
+              {loading ? "Salvando..." : "Salvar"}
+            </Button>
+          </form>
+          </div>
     </div>
   );
 }
