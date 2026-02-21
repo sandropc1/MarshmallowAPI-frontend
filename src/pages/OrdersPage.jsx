@@ -18,7 +18,7 @@ export default function OrdersPage() {
       setLoading(true);
 
       const res = await fetch(`${baseURL}/orders`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      if (!res.ok) throw new Error(`HTTP ${res.sktatus}`);
 
       const json = await res.json();
       const list = Array.isArray(json)
@@ -33,31 +33,22 @@ export default function OrdersPage() {
   }
 
   return (
-    <div>
-      <div>
-        <h2>Orders</h2>
+    <div class="flex flex-col min-h-screen">
+      <div class="flex flex-col flex-grow m-12 p-6 max-w-5xl mx-auto">
+        <h2 class="flex justify-center">Orders</h2>
 
-        <button
+        <Button
           onClick={loadOrders}
           disabled={loading}
-          style={{ padding: "8px 12px" }}
         >
           {loading ? "Carregando..." : "Carregar pedidos"}
-        </button>
+        </Button>
 
-        {error && <p style={{ color: "crimson" }}>Erro: {error}</p>}
-
-        <div style={{ marginTop: 12 }}>
+        <div class="border bg-gray-200 m-9 min-inline-xs">
           <Orders orders={orders} />
         </div>
-
-        <button
-          onClick={() => navigate("/")}
-          style={{ padding: "6px 10px", marginBottom: 12 }}
-        >
-          Voltar para Home
-        </button>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -66,6 +66,7 @@ export default function UsersPage() {
   }
 
   return (
+    
     <div class="min-h-screen flex flex-col">
       <div class="flex flex-col flex-grow m-12 p-6 max-w-5xl mx-auto">
         <h2 class="flex justify-center">Usuários</h2>

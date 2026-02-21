@@ -1,12 +1,14 @@
 export default function Orders({ orders }) {
   return (
-    <div>
-      <p>Total: {orders.length}</p>
+    <div class="border">
+      <div class="border-b p-2 bg-slate-800 text-white">
+        <h2>Total: {orders.length}</h2>
+      </div>
 
-      <ul>
+      <ul class="p-2">
         {orders.map((o, i) => (
           <li key={o.id ?? i}>
-            #{o.id ?? "?"} {o.orderStatus ?? ""}
+            Order id:{o.id ?? "?"}, STATUS:{o.orderStatus ?? ""}, Client:{o.client.name ?? ""}
           </li>
         ))}
       </ul>
