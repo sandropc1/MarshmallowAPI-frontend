@@ -6,8 +6,6 @@ import OrdersPage from "./pages/OrdersPage.jsx";
 import CategoriesPage from "./pages/CategoriesPage.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
 
-
-
 export default function App() {
   return (
     <div class="font-sans min-h-screen flex flex-col">

@@ -25,7 +25,9 @@ export default function UsersPage() {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       const json = await res.json();
-      const list = Array.isArray(json) ? json : (json.content ?? json.users ?? []);
+      const list = Array.isArray(json)
+        ? json
+        : (json.content ?? json.users ?? []);
       setUsers(list);
     } catch (e) {
       setError(e?.message || "Erro ao carregar usuários");
@@ -64,37 +66,32 @@ export default function UsersPage() {
   }
 
   return (
-      <div class = "min-h-screen flex flex-col">
-        <div class="flex flex-col flex-grow m-12 p-6 max-w-5xl mx-auto">
-         <h2 class="flex justify-center">Usuários</h2>
+    <div class="min-h-screen flex flex-col">
+      <div class="flex flex-col flex-grow m-12 p-6 max-w-5xl mx-auto">
+        <h2 class="flex justify-center">Usuários</h2>
 
-            <div class="flex justify-center ">
+        <div class="flex justify-center ">
+          <UsersActions
+            usersCount={users.length}
+            onLoad={loadUsers}
+            onToggleForm={() => setShowForm((v) => !v)}
+            loading={loadingList}
+            creating={creating}
+            showForm={showForm}
+          />
+        </div>
 
-              <UsersActions
-                usersCount={users.length}
-                onLoad={loadUsers}
-                onToggleForm={() => setShowForm((v) => !v)}
-                loading={loadingList}
-                creating={creating}
-                showForm={showForm}
-              />
-            </div>
+        <div class="flex justify-center">
+          {showForm && (
+            <CreateUserForm onSubmit={createUser} loading={creating} />
+          )}
 
-            <div class="flex justify-center">
-              {showForm && (
-                <CreateUserForm
-                  onSubmit={createUser}
-                  loading={creating}
-                />
-              )}
-
-            <div class="border bg-gray-200 m-9 min-inline-xs">
-                <Users users={users} />
-            </div>
-
+          <div class="border bg-gray-200 m-9 min-inline-xs">
+            <Users users={users} />
+          </div>
         </div>
       </div>
       <Footer />
-     </div>
+    </div>
   );
 }

@@ -19,7 +19,9 @@ export default function CategoriesPage() {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       const json = await res.json();
-      const list = Array.isArray(json) ? json : (json.content ?? json.categories ?? []);
+      const list = Array.isArray(json)
+        ? json
+        : (json.content ?? json.categories ?? []);
       setCategories(list);
     } catch (e) {
       setError(e?.message || "Erro ao carregar categorias");
@@ -30,10 +32,13 @@ export default function CategoriesPage() {
 
   return (
     <div>
-
       <h2>Categories</h2>
 
-      <button onClick={loadCategories} disabled={loading} style={{ padding: "8px 12px" }}>
+      <button
+        onClick={loadCategories}
+        disabled={loading}
+        style={{ padding: "8px 12px" }}
+      >
         {loading ? "Carregando..." : "Carregar categorias"}
       </button>
 
@@ -43,7 +48,10 @@ export default function CategoriesPage() {
         <Categories categories={categories} />
       </div>
 
-      <button onClick={() => navigate("/")} style={{ padding: "6px 10px", marginBottom: 12 }}>
+      <button
+        onClick={() => navigate("/")}
+        style={{ padding: "6px 10px", marginBottom: 12 }}
+      >
         Voltar para Home
       </button>
     </div>
