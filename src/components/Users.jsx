@@ -7,8 +7,7 @@ export default function Users({ users }) {
       <ul class="p-2">
         {users.map((u, i) => (
           <li key={u.id ?? i}>
-            {u.name ?? "(Sem nome)"} {u.email ?? "(Sem e-mail)"}{" "}
-            {u.phone ?? "(Sem telefone)"}
+            {u.name ?? "(Sem nome)"} | {u.email ?? "(Sem e-mail)"} | {u.phone ?? "(Sem telefone)"}
           </li>
         ))}
       </ul>
